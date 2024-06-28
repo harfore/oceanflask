@@ -1,6 +1,9 @@
 # Oceanflask
+Need to get something off your chest, but would rather keep it to yourself? <br>
+A quick account set up and you're good to go! <br>
+Write, save your thoughts, revisit old entries and delete the ones that don't resonate anymore.
 
-Need to get something off your chest, but would rather keep it to yourself?
+Made with Python, Tkinter and SQLite.
 
 ## Setup
 
