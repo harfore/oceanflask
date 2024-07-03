@@ -113,18 +113,18 @@ def diary_screen(username):
             entry_label = tk.Label(entry_frame, text=f"{timestamp}: {entry}", anchor='w')
             entry_label.pack(side='left', fill='x', expand=True)
         
-            delete_button = tk.Button(entry_frame, text="Delete", command=partial(delete_entry, rowid, entries_window))
+            delete_button = tk.Button(entry_frame, text="Erase", command=partial(delete_entry, rowid, entries_window))
             delete_button.pack(side='right')
             
     def delete_entry(rowid, entries_window):
         c.execute('DELETE FROM entries WHERE rowid=?', (rowid,))
         conn.commit()
-        messagebox.showinfo("Success", "Entry Deleted")
+        messagebox.showinfo("Success", "Entry Erased")
         entries_window.destroy()
         view_entries()
 
 
-    entry_text = tk.Text(diary, height=10, width=50)
+    entry_text = tk.Text(diary, height=15, width=70)
     entry_text.pack()
     button_add = tk.Button(diary, text="Add Entry", command=add_entry)
     button_add.pack()
