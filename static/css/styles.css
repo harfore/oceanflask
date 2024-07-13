@@ -1,0 +1,24 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 2rem 15rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    margin: 2rem;
+}
+
+.header-button {
+    padding: 3rem;
+    margin: 4rem 4rem;
+    background-color: violet;
+    border-radius: 2rem;
+}
+
+.header-button:hover {
+    background-color: blueviolet;
+}

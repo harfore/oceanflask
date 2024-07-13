@@ -1,0 +1,129 @@
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+import sqlite3
+import hashlib
+import datetime
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+# Establish connection to SQLite database
+conn = sqlite3.connect('diary.db')
+c = conn.cursor()
+
+# Create tables if they don't exist
+c.execute('''CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)''')
+c.execute('''CREATE TABLE IF NOT EXISTS entries (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, entry TEXT, timestamp TEXT)''')
+conn.commit()
+
+# Add 'timestamp' column if it doesn't exist in 'entries' table
+c.execute("PRAGMA table_info(entries)")
+columns = [info[1] for info in c.fetchall()]
+if 'timestamp' not in columns:
+    c.execute('ALTER TABLE entries ADD COLUMN timestamp TEXT')
+    conn.commit()
+
+# Function to hash passwords
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def get_db_connection():
+    conn = sqlite3.connect('diary.db')
+    conn.row_factory = sqlite3.Row  # Access rows as dictionaries
+    return conn
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        if not username or not password:
+            flash('Username and Password cannot be empty', 'error')
+            return redirect(url_for('register'))
+        
+        hashed_password = hash_password(password)
+
+        conn = get_db_connection()
+        c = conn.cursor()
+        c.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+        conn.commit()
+        conn.close()
+
+        flash('Registration Successful', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if not username or not password:
+            flash('Username and Password cannot be empty', 'error')
+            return redirect(url_for('login'))
+
+        hashed_password = hash_password(password)
+        conn = get_db_connection()
+        c = conn.cursor()
+        c.execute('SELECT * FROM users WHERE username=? AND password=?', (username, hashed_password))
+        user = c.fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = username
+            flash('Login Successful', 'success')
+            return redirect(url_for('diary'))
+        else:
+            flash('Invalid Credentials', 'error')
+
+    return render_template('login.html')
+
+@app.route('/diary', methods=['GET', 'POST'])
+def diary():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    if request.method == 'POST':
+        entry = request.form['entry']
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        c.execute('INSERT INTO entries (username, entry, timestamp) VALUES (?, ?, ?)', (username, entry, timestamp))
+        conn.commit()
+        flash('Entry Added', 'success')
+
+    c.execute('SELECT id, entry, timestamp FROM entries WHERE username=?', (username,))
+    entries = c.fetchall()
+    conn.close()
+
+    return render_template('diary.html', entries=entries)
+
+@app.route('/delete_entry/<int:entry_id>', methods=['POST'])
+def delete_entry(entry_id):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute('DELETE FROM entries WHERE id=?', (entry_id,))
+    conn.commit()
+    conn.close()
+
+    flash('Entry Deleted', 'success')
+    return redirect(url_for('diary'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)

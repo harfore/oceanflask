@@ -1,27 +1,37 @@
-# init_db.py
 import sqlite3
 
 def initialize_db():
-    conn = sqlite3.connect('diary.db')
-    c = conn.cursor()
+    try:
+        conn = sqlite3.connect('diary.db')
+        c = conn.cursor()
 
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            username TEXT UNIQUE,
-            password TEXT
-        )
-    ''')
+        # Create users table
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                username TEXT UNIQUE,
+                password TEXT
+            )
+        ''')
 
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS entries (
-            username TEXT,
-            entry TEXT,
-            timestamp TEXT
-        )
-    ''')
+        # Create entries table
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS entries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT,
+                entry TEXT,
+                timestamp TEXT
+            )
+        ''')
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        print("Database initialized successfully.")
+
+    except sqlite3.Error as e:
+        print(f"Error initializing database: {e}")
+
+    finally:
+        if conn:
+            conn.close()
 
 if __name__ == '__main__':
     initialize_db()

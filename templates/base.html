@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>DROP A FLASK</title>
+</head>
+
+<body>
+    <br>
+    <br>
+    <nav>
+        <a href="{{ url_for('index') }}"><button class="header-button">Home</button></a>
+        {% if 'username' in session %}
+        <a href="{{ url_for('diary') }}"> <button class="header-button">Diary</button></a>
+        <a href="{{ url_for('logout') }}"> <button class="header-button">Logout</button></a>
+        {% else %}
+        <a href="{{ url_for('login') }}"> <button class="header-button">Login</button></a>
+        <a href="{{ url_for('register') }}"> <button class="header-button">Register</button></a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
