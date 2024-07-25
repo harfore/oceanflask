@@ -9,16 +9,15 @@
 </head>
 
 <body>
-    <br>
-    <br>
+    <h2 class="">Oceanflask</h2>
     <nav>
-        <a href="{{ url_for('index') }}"><button class="header-button">Home</button></a>
+        <a href="{{ url_for('index') }}"><button class="header-button">HOME</button></a>
         {% if 'username' in session %}
-        <a href="{{ url_for('diary') }}"> <button class="header-button">Diary</button></a>
-        <a href="{{ url_for('logout') }}"> <button class="header-button">Logout</button></a>
+        <a href="{{ url_for('diary') }}"> <button class="header-button">DIARY</button></a>
+        <a href="{{ url_for('logout') }}"> <button class="header-button">LOGOUT</button></a>
         {% else %}
-        <a href="{{ url_for('login') }}"> <button class="header-button">Login</button></a>
-        <a href="{{ url_for('register') }}"> <button class="header-button">Register</button></a>
+        <a href="{{ url_for('login') }}"> <button class="header-button">LOGIN</button></a>
+        <a href="{{ url_for('register') }}"> <button class="header-button">REGISTER</button></a>
         {% endif %}
     </nav>
     <div class="container">

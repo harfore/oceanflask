@@ -3,7 +3,7 @@
 <h1 class="title">Diary Entries</h1>
 <form method="post">
     <div>
-        <textarea name="entry" title="entry" placeholder="What's on your mind?" required></textarea>
+        <textarea class="diary-input" name="entry" title="entry" placeholder="What's on your mind?" required></textarea>
     </div>
     <button type="submit">Add Entry</button>
 </form>
@@ -14,7 +14,7 @@
     <div class="entry">
         <p>{{ entry['timestamp'] }}: {{ entry['entry'] }}</p>
         <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
-            <button type="submit">Delete</button>
+            <button class="diary-button" type="submit">Delete</button>
         </form>
     </div>
     {% endfor %}
