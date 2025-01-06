@@ -1,0 +1,20 @@
+<header>
+    <div class="header-container">
+        <a href="{{ url_for('index') }}">
+            <h2 class="title">Oceanflask</h2>
+        </a>
+        <nav class="header-nav">
+            {% if 'username' in session %}
+            <a href="{{ url_for('diary') }}"> <button class="header-button" title="Diary"><i
+                        class="fas fa-book"></i><span>Diary</span></button></a>
+            <a href="{{ url_for('logout') }}"> <button class="header-button" title="Logout"><i
+                        class="fas fa-sign-out-alt"></i><span>Logout</span></button></a>
+            {% else %}
+            <a href="{{ url_for('login') }}"> <button class="header-button" title="Login"><i
+                        class="fas fa-key"></i><span>Login</span></button></a>
+            <a href="{{ url_for('register') }}"> <button class="header-button"><i class="fas fa-user-plus"
+                        title="Register"></i><span>Register</span></button></a>
+            {% endif %}
+        </nav>
+    </div>
+</header>

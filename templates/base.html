@@ -5,21 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>DROP A FLASK</title>
 </head>
 
 <body>
-    <h2 class="">Oceanflask</h2>
-    <nav>
-        <a href="{{ url_for('index') }}"><button class="header-button">HOME</button></a>
-        {% if 'username' in session %}
-        <a href="{{ url_for('diary') }}"> <button class="header-button">DIARY</button></a>
-        <a href="{{ url_for('logout') }}"> <button class="header-button">LOGOUT</button></a>
-        {% else %}
-        <a href="{{ url_for('login') }}"> <button class="header-button">LOGIN</button></a>
-        <a href="{{ url_for('register') }}"> <button class="header-button">REGISTER</button></a>
-        {% endif %}
-    </nav>
+    <div class="background">
+        <img src="../images/background.gif" alt="" />
+    </div>
+    {% include 'header.html' %}
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
