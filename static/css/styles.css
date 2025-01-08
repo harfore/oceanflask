@@ -2,13 +2,24 @@
 body {
     /* background-color: sandybrown; */
     color: rgb(2, 148, 173);
-    margin: 1rem;
     font-family: 'Free Mono', monospace;
     font-weight: bold;
     text-decoration: none;
     width: 100%;
     max-width: 80vw;
     overflow-x: hidden;
+
+    /* background */
+    background-image: url('../images/beach-waves.gif');
+    background-size: cover;
+    /* Ensures the image covers the entire screen */
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+
 }
 
 a {
@@ -27,14 +38,16 @@ a {
     margin: 1rem;
     text-decoration: none;
     justify-content: flex-start;
-    text-decoration: none;
+    color: rgb(2, 148, 173);
 }
 
 .header-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0.25rem 1rem;
+    border-bottom: 0.20rem solid blue;
+    background-color: sandybrown;
 }
 
 .header-button {
@@ -130,19 +143,37 @@ a {
     justify-content: flex-end;
 }
 
+.container {
+
+    /* general */
+    /* border: 0.25rem blue solid; */
+    height: 25rem;
+    width: 65%;
+}
+
+.entries {
+    display: flex;
+    flex-direction: row;
+}
+
+.account_choice {
+    width: 6rem;
+    height: 6rem;
+    animation: float 4s ease-in-out infinite;
+}
+
 /* Media queries for larger screens */
 @media (min-width: 768px) {
     body {
-        margin: 2rem 10%;
+        margin: 0;
     }
 
     .diary-input {
         max-width: 500px;
-        /* Limit input width for larger screens */
     }
 
     .title {
-        margin: 2rem;
+        margin: 1rem 2rem 2rem;
     }
 
     .header-button {
@@ -157,5 +188,95 @@ a {
 @media (min-width: 1200px) {
     body {
         margin: 2rem 15rem;
+    }
+}
+
+.parchment {
+    width: 60%;
+    max-width: 400px;
+    height: 70%;
+    padding: 1rem 0.5rem 0.5rem;
+    background: #f5deb3;
+    border: 2px solid #c2a679;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    color: #5a4632;
+    /* Dark brown text color */
+    line-height: 1.6;
+    margin: 2rem auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add torn edges effect */
+.parchment:before,
+.parchment:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background: #c2a679;
+    /* Match border color */
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: 0 10px 0 #f5deb3;
+    /* Fake torn shadow */
+}
+
+.parchment:after {
+    top: auto;
+    bottom: 0;
+    box-shadow: 0 -10px 0 #f5deb3;
+}
+
+.parchment:hover {
+    transform: rotate(-2deg);
+    transition: all 0.3s ease-in-out;
+}
+
+.bottle {
+    position: relative;
+    width: 100px;
+    height: 250px;
+    background: #d0efff;
+    /* Glassy blue */
+    border-radius: 40% / 10%;
+    margin: 1rem auto;
+    border: 4px solid #a0d2eb;
+    /* Glass border */
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.bottle::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #a0d2eb;
+    border-radius: 20% / 50%;
+    border: 4px solid #78bbdc;
+}
+
+.bottle {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
     }
 }

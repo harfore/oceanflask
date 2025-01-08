@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="account_choice">
+    <a href="{{ url_for('diary') }}">
+        <button class="header-button" title="Diary">
+            <i class="fas fa-book"></i>
+            <span>Revisit old entries</span>
+        </button>
+    </a>
+</div>
+
+<div class="account_choice">
+    <a href="{{ url_for('new_entry') }}">
+        <button class="header-button" title="Diary">
+            <i class="fas fa-book"></i>
+            <span>Write a new</span>
+        </button>
+    </a>
+</div>
+
+{% endblock %}

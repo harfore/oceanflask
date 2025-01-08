@@ -1,25 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="title">Diary Entries</h1>
-<form method="post">
-    <div>
-        <input rows="10" cols="30" class="diary-input" name="entry" title="Type your entry..."
-            placeholder="What's on your mind?" required></input>
-    </div>
-    <button type="submit" class="diary-button">Throw your flask</button>
-</form>
 
 {% if entries %}
 <div class="entries-container">
     <h2>Your Entries</h2>
-    {% for entry in entries %}
-    <div class="entry">
+    <div class="entries">
+        {% for entry in entries %}
+        <div class="bottle">
+            <div class="parchment">
+                <p><strong>{{ entry['timestamp'] }}</strong>: {{ entry['entry'].split(' ')[:3] | join(' ') }}...</p>
+                <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
+                    <button class="diary-button" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="entry">
         <p>{{ entry['timestamp'] }}: {{ entry['entry'] }}</p>
         <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
             <button class="diary-button" type="submit">Delete</button>
         </form>
+        </div> -->
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% else %}
 <p> </p>
