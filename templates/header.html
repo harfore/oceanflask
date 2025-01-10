@@ -5,8 +5,8 @@
         </a>
         <nav class="header-nav">
             {% if 'username' in session %}
-            <a href="{{ url_for('diary') }}"> <button class="header-button" title="Diary"><i
-                        class="fas fa-book"></i><span>Diary</span></button></a>
+            <a href="{{ url_for('account_menu') }}"> <button class="header-button" title="Menu"><i
+                        class="fas fa-bars"></i><span>Menu</span></button></a>
             <a href="{{ url_for('logout') }}"> <button class="header-button" title="Logout"><i
                         class="fas fa-sign-out-alt"></i><span>Logout</span></button></a>
             {% else %}
@@ -16,5 +16,30 @@
                         title="Register"></i><span>Register</span></button></a>
             {% endif %}
         </nav>
+
+        <nav class="header-nav-mobile">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="mobile-slide-menu" id="mobile-slide-menu">
+                {% if 'username' in session %}
+                <a href="{{ url_for('index')}}" class="slide_menu_option">Home</a>
+                <a href="{{ url_for('account_menu') }}" class="slide_menu_option">Menu</a>
+                <a href="" class="slide_menu_option">Settings</a>
+                <a href="{{ url_for('logout') }}" class="slide_menu_option">Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="slide_menu_option">Login</a>
+                <a href="{{ url_for('register') }}" class="slide_menu_option">Register</a>
+                {% endif %}
+            </div>
+        </nav>
     </div>
+    <script>
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const slideMenu = document.getElementById('mobile-slide-menu');
+
+        hamburgerMenu.addEventListener('click', () => {
+            slideMenu.classList.toggle('show');
+        });
+    </script>
 </header>

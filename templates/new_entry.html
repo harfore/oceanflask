@@ -3,10 +3,20 @@
 
 <form method="post">
     <div>
-        <input rows="10" cols="30" class="diary-input" name="entry" title="Type your entry..."
-            placeholder="What's on your mind?" required></input>
+        <input rows="10" cols="30" class="diary-input" name="entry" placeholder="What's on your mind?" required></input>
     </div>
     <button type="submit" class="diary-button">Throw your flask</button>
+    <a href="{{ url_for('diary') }}" class="diary-button">Back to Diary</a>
 </form>
+
+<!-- {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flash-messages">
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %} -->
 
 {% endblock %}

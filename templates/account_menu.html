@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="account_choice">
-    <a href="{{ url_for('diary') }}">
-        <button class="header-button" title="Diary">
-            <i class="fas fa-book"></i>
-            <span>Revisit old entries</span>
-        </button>
-    </a>
-</div>
+<div class="account_menu_container">
+    <div class="menu_option">
+        <a href="{{ url_for('diary') }}">
+            <span class="menu_option_title">Revisit old entries</span>
+        </a>
+    </div>
 
-<div class="account_choice">
-    <a href="{{ url_for('new_entry') }}">
-        <button class="header-button" title="Diary">
-            <i class="fas fa-book"></i>
-            <span>Write a new</span>
-        </button>
-    </a>
+    <div class="menu_option">
+        <a href="{{ url_for('new_entry') }}">
+            <span class="menu_option_title">Write a new entry</span>
+        </a>
+    </div>
 </div>
 
 {% endblock %}

@@ -84,6 +84,14 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/account_menu')
+def account_menu():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    return render_template('account_menu.html')
+
+
 @app.route('/diary', methods=['GET', 'POST'])
 def diary():
     if 'username' not in session:
@@ -106,6 +114,28 @@ def diary():
 
     return render_template('diary.html', entries=entries)
 
+@app.route('/view_entry/<int:entry_id>', methods=['GET'])
+def view_entry(entry_id):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    c.execute(
+        'SELECT id, entry, timestamp FROM entries WHERE id = ? AND username = ?',
+        (entry_id, username)
+    )
+    entry = c.fetchone()
+    conn.close()
+
+    if not entry:
+        return redirect(url_for('diary'))
+
+    return render_template('view_entry.html', entry=entry)
+
+
 @app.route('/delete_entry/<int:entry_id>', methods=['POST'])
 def delete_entry(entry_id):
     if 'username' not in session:
@@ -119,6 +149,36 @@ def delete_entry(entry_id):
 
     flash('Entry Deleted', 'success')
     return redirect(url_for('diary'))
+
+@app.route('/new_entry', methods=['GET', 'POST'])
+def new_entry():
+    # Check if the user is logged in
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+
+    if request.method == 'POST':
+        entry_content = request.form.get('entry')  # Get the entry content from the form
+        if not entry_content.strip():
+            flash("Entry cannot be empty", "warning")
+            return redirect(url_for('new_entry'))
+
+        # Save the entry to the database
+        conn = get_db_connection()
+        c = conn.cursor()
+        c.execute(
+            'INSERT INTO entries (username, entry, timestamp) VALUES (?, ?, CURRENT_TIMESTAMP)',
+            (username, entry_content)
+        )
+        conn.commit()
+        conn.close()
+
+        flash("New entry created!", "success")
+        return redirect(url_for('diary'))  # Redirect to the diary page
+
+    # If GET request, show the new entry form
+    return render_template('new_entry.html')
 
 @app.route('/logout')
 def logout():

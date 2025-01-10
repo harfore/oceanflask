@@ -1,25 +1,24 @@
-/* Base styles for mobile devices */
 body {
-    /* background-color: sandybrown; */
-    color: rgb(2, 148, 173);
-    font-family: 'Free Mono', monospace;
-    font-weight: bold;
     text-decoration: none;
     width: 100%;
-    max-width: 80vw;
+    max-width: 100vw;
+    box-sizing: border-box;
     overflow-x: hidden;
 
+
     /* background */
-    background-image: url('../images/beach-waves.gif');
+    background-color: #007bff;
     background-size: cover;
     /* Ensures the image covers the entire screen */
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
-    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
 
+    /* font */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
 }
 
 a {
@@ -34,6 +33,50 @@ a {
     z-index: -1;
 }
 
+.header-nav-mobile {
+    display: block;
+    position: relative;
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+.mobile-slide-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 40%;
+    height: 100%;
+    background-color: yellow;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.mobile-slide-menu a {
+    text-decoration: none;
+    color: black;
+    padding: 1rem 0;
+}
+
+.mobile-slide-menu a:hover {
+    background-color: #007bff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.mobile-slide-menu.show {
+    left: 0;
+}
+
 .title {
     margin: 1rem;
     text-decoration: none;
@@ -42,12 +85,13 @@ a {
 }
 
 .header-container {
+    background-color: turquoise;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 0.25rem 1rem;
-    border-bottom: 0.20rem solid blue;
-    background-color: sandybrown;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-button {
@@ -90,12 +134,12 @@ a {
 
 .header-button:hover i {
     opacity: 0;
-    /* Hide the icon on hover */
+    /* hiding the icon on hover */
 }
 
 .header-button:hover span {
     opacity: 1;
-    /* Show the text on hover */
+    /* showing the text on hover */
 }
 
 .diary-input {
@@ -134,6 +178,10 @@ a {
 
 .entries-container {
     width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 .header-nav {
@@ -144,22 +192,37 @@ a {
 }
 
 .container {
-
     /* general */
-    /* border: 0.25rem blue solid; */
     height: 25rem;
-    width: 65%;
+    width: 100%;
 }
 
-.entries {
+.entry_date {
+    margin-left: 3rem;
+    text-align: left;
+}
+
+.account_menu_container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.account_choice {
-    width: 6rem;
-    height: 6rem;
+.menu_option {
+    width: 12rem;
+    height: 12rem;
     animation: float 4s ease-in-out infinite;
+    border: 1rem solid turquoise;
+    border-radius: 30%;
+    gap: 2rem;
+    text-align: center;
+    margin: 2rem auto auto;
+}
+
+.menu_option_title {
+    font-size: 0.9rem;
+    color: yellow;
 }
 
 /* Media queries for larger screens */
@@ -185,14 +248,26 @@ a {
     }
 }
 
+@media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+}
+
 @media (min-width: 1200px) {
     body {
         margin: 2rem 15rem;
     }
 }
 
+@media screen and (min-width: 769px) {
+    .header-nav-mobile {
+        display: none;
+    }
+}
+
 .parchment {
-    width: 60%;
+    width: 80%;
     max-width: 400px;
     height: 70%;
     padding: 1rem 0.5rem 0.5rem;
@@ -279,4 +354,9 @@ a {
     50% {
         transform: translateY(-10px);
     }
+}
+
+.register_form {
+    margin: 2rem;
+    text-align: center;
 }
