@@ -8,7 +8,16 @@
     <a href="{{ url_for('view_entry', entry_id=entry['id']) }}">
         <div class="bottle">
             <div class="parchment">
-                <p><strong>{{ entry['timestamp'] }}</strong>: {{ entry['entry'].split(' ')[:3] | join(' ') }}...</p>
+                <p>
+                    <strong>
+                        {% if entry['timestamp'].year == current_timestamp.year %}
+                        {{ entry['timestamp'] | strftime('%B %d') }}
+                        {% else %}
+                        {{ entry['timestamp'] | strftime('%B %d, %Y') }}
+                        {% endif %}
+                    </strong>
+                    {{ entry['entry'].split(' ')[:3] | join(' ') }}...
+                </p>
             </div>
         </div>
     </a>

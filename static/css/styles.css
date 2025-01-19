@@ -7,8 +7,9 @@ body {
 
 
     /* background */
-    background-color: #007bff;
+    background: linear-gradient(to bottom, #87ceeb, #fdf5e6);
     background-size: cover;
+    background-attachment: fixed;
     /* Ensures the image covers the entire screen */
     background-position: center;
     background-repeat: no-repeat;
@@ -155,6 +156,8 @@ a {
     font-size: 16px;
     color: #333;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 7rem;
+    overflow-y: auto;
 }
 
 .diary-input:focus {
@@ -170,6 +173,7 @@ a {
     border: rgb(0, 100, 117);
     margin: 0.5rem 0;
     cursor: pointer;
+    color: white;
 }
 
 .diary-button:hover {
@@ -222,7 +226,7 @@ a {
 
 .menu_option_title {
     font-size: 0.9rem;
-    color: yellow;
+    color: turquoise;
 }
 
 /* Media queries for larger screens */
@@ -255,8 +259,10 @@ a {
 }
 
 @media (min-width: 1200px) {
-    body {
-        margin: 2rem 15rem;
+
+    .header-nav {
+        display: flex;
+        padding: 0 2rem;
     }
 }
 
@@ -264,10 +270,19 @@ a {
     .header-nav-mobile {
         display: none;
     }
+
+    .header-nav {
+        display: flex;
+        padding: 0 2rem;
+    }
+
+    .account_menu_container {
+        flex-direction: row;
+    }
 }
 
 .parchment {
-    width: 80%;
+    width: 60%;
     max-width: 400px;
     height: 70%;
     padding: 1rem 0.5rem 0.5rem;
@@ -321,7 +336,7 @@ a {
     background: #d0efff;
     /* Glassy blue */
     border-radius: 40% / 10%;
-    margin: 1rem auto;
+    margin: 3rem auto;
     border: 4px solid #a0d2eb;
     /* Glass border */
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
@@ -356,7 +371,169 @@ a {
     }
 }
 
-.register_form {
-    margin: 2rem;
+/* Base Styles (Mobile-First) */
+.register_form,
+.login_form {
+    margin: 1rem auto;
     text-align: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    max-width: 90%;
+}
+
+.register_form h1,
+.login_form h1 {
+    color: #f4a460;
+    /* Coral color for headings */
+}
+
+.form_field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5em;
+}
+
+.field_label {
+    color: #f4a460;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.field_input {
+    width: 100%;
+    padding: 0.75em;
+    border: 2px solid #f4a460;
+    /* Sand color */
+    border-radius: 10px;
+    background-color: #fffaf0;
+    /* Light sand-like color */
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.field_input:focus {
+    border-color: #ffa07a;
+    /* Light coral on focus */
+    box-shadow: 0 0 5px rgba(255, 160, 122, 0.5);
+    outline: none;
+}
+
+.form_button {
+    margin-top: 1.5em;
+    padding: 0.75em 2em;
+    background-color: #ffa07a;
+    /* Light coral */
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form_button:hover {
+    background-color: #ff6347;
+    /* Tomato red on hover */
+    color: #fffaf0;
+    /* Light sand */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 768px) {
+
+    .register_form,
+    .login_form {
+        padding: 2rem;
+        max-width: 400px;
+    }
+
+    .form_field {
+        margin: 2em;
+    }
+
+    .field_input {
+        font-size: 1.1rem;
+    }
+
+    .form_button {
+        font-size: 1.2rem;
+    }
+}
+
+.flash-container {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px;
+}
+
+.flash-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0.95;
+    animation: fade-in 0.5s ease, fade-out 3.5s ease 3s forwards;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 0.95;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.view_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.new_entry {
+    margin: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

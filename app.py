@@ -2,11 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3
 import hashlib
 import datetime
+from datetime import datetime
+current_timestamp = datetime.now()
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-# Establish connection to SQLite database
 conn = sqlite3.connect('diary.db')
 c = conn.cursor()
 
@@ -30,6 +31,21 @@ def get_db_connection():
     conn = sqlite3.connect('diary.db')
     conn.row_factory = sqlite3.Row  # Access rows as dictionaries
     return conn
+
+def get_user_from_db(username, password):
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute('SELECT * FROM users WHERE username=? AND password=?', (username, password))
+    user = c.fetchone()
+    conn.close()
+    return user
+
+@app.template_filter('strftime')
+def format_datetime(value, format='%B %d, %Y'):
+    """Format a datetime object using strftime."""
+    if isinstance(value, datetime):
+        return value.strftime(format)
+    return value
 
 @app.route('/')
 def index():
@@ -69,16 +85,12 @@ def login():
             return redirect(url_for('login'))
 
         hashed_password = hash_password(password)
-        conn = get_db_connection()
-        c = conn.cursor()
-        c.execute('SELECT * FROM users WHERE username=? AND password=?', (username, hashed_password))
-        user = c.fetchone()
-        conn.close()
+        user = get_user_from_db(username, hashed_password)
 
         if user:
             session['username'] = username
             flash('Login Successful', 'success')
-            return redirect(url_for('diary'))
+            return redirect(url_for('account_menu'))
         else:
             flash('Invalid Credentials', 'error')
 
@@ -91,7 +103,6 @@ def account_menu():
     
     return render_template('account_menu.html')
 
-
 @app.route('/diary', methods=['GET', 'POST'])
 def diary():
     if 'username' not in session:
@@ -102,17 +113,27 @@ def diary():
     c = conn.cursor()
 
     if request.method == 'POST':
-        entry = request.form['entry']
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        c.execute('INSERT INTO entries (username, entry, timestamp) VALUES (?, ?, ?)', (username, entry, timestamp))
-        conn.commit()
-        flash('Entry Added', 'success')
+        try:
+            entry = request.form['entry']
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            c.execute('INSERT INTO entries (username, entry, timestamp) VALUES (?, ?, ?)', (username, entry, timestamp))
+            conn.commit()
+            flash('Entry Added', 'success')
+        except Exception as e:
+            flash('An error occurred while adding your entry.', 'error')
 
     c.execute('SELECT id, entry, timestamp FROM entries WHERE username=?', (username,))
-    entries = c.fetchall()
+    entries = [
+        {
+            'id': entry['id'],
+            'entry': entry['entry'],
+            'timestamp': datetime.strptime(entry['timestamp'], "%Y-%m-%d %H:%M:%S")
+        }
+        for entry in c.fetchall()
+    ]
     conn.close()
 
-    return render_template('diary.html', entries=entries)
+    return render_template('diary.html', entries=entries, current_timestamp=current_timestamp)
 
 @app.route('/view_entry/<int:entry_id>', methods=['GET'])
 def view_entry(entry_id):

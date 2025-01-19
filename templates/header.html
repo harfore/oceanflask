@@ -28,6 +28,7 @@
                 <a href="" class="slide_menu_option">Settings</a>
                 <a href="{{ url_for('logout') }}" class="slide_menu_option">Logout</a>
                 {% else %}
+                <a href="{{ url_for('index')}}" class="slide_menu_option">Home</a>
                 <a href="{{ url_for('login') }}" class="slide_menu_option">Login</a>
                 <a href="{{ url_for('register') }}" class="slide_menu_option">Register</a>
                 {% endif %}
