@@ -2,13 +2,15 @@
 {% block content %}
 <br>
 <h1 class="title">Write something, release it to the sea.</h1>
-<div class="bottle">
-    <div class="parchment">
-        <p>
-            Dear finder,
-            Forget eveything. Become someone new.
-        </p>
+<div class="sea">
+    {% for entry in entries %}
+    <div class="bottle">
+        <div class="parchment">
+            <p>
+                {{ entry }}
+            </p>
+        </div>
     </div>
+    {% endfor %}
 </div>
-
 {% endblock %}

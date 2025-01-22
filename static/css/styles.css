@@ -34,6 +34,11 @@ a {
     z-index: -1;
 }
 
+.sea {
+    display: flex;
+    flex-direction: row;
+}
+
 .header-nav-mobile {
     display: block;
     position: relative;

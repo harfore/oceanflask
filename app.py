@@ -49,7 +49,13 @@ def format_datetime(value, format='%B %d, %Y'):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    entries = [
+        "Forget everything. Become someone new.",
+        "Write your destiny. Set it free.",
+        "Hope is the anchor of the soul.",
+        "Let go of the past; embrace the waves."
+    ]
+    return render_template('index.html', entries=entries)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
