@@ -7,7 +7,7 @@
     <p>{{ entry['entry'] }}</p>
 </div>
 
-<div class="view_buttons">
+<div class="view-buttons">
     <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
         <button class="header-button" type="submit"><i class="fas fa-trash"></i><span>Delete</span></button>
     </form>

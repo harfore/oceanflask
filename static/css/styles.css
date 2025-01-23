@@ -36,7 +36,11 @@ a {
 
 .sea {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background-image: url(../images/beach-waves.gif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .header-nav-mobile {
@@ -74,8 +78,8 @@ a {
 }
 
 .mobile-slide-menu a:hover {
-    background-color: #007bff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 0.5rem;
 
 }
 
@@ -149,11 +153,10 @@ a {
 }
 
 .diary-input {
-    width: 80%;
-    max-width: 80%;
-    /* Adjusts for smaller screens */
+    width: 50vw;
     height: 150px;
-    padding: 10px;
+    margin: 1rem;
+    padding: 1em;
     border: 2px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -202,8 +205,9 @@ a {
 
 .container {
     /* general */
-    height: 25rem;
-    width: 100%;
+    height: 20rem;
+    width: 90%;
+    margin: auto;
 }
 
 .entry_date {
@@ -219,6 +223,8 @@ a {
 }
 
 .menu_option {
+    background: linear-gradient(135deg, turquoise, #0168e6);
+    color: white;
     width: 12rem;
     height: 12rem;
     animation: float 4s ease-in-out infinite;
@@ -226,12 +232,22 @@ a {
     border-radius: 30%;
     gap: 2rem;
     text-align: center;
+    justify-content: center;
     margin: 2rem auto auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.menu_option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .menu_option_title {
-    font-size: 0.9rem;
-    color: turquoise;
+    font-size: 1.1rem;
+    color: white;
 }
 
 /* Media queries for larger screens */
@@ -240,8 +256,14 @@ a {
         margin: 0;
     }
 
+    .sea {
+        display: flex;
+        flex-direction: row;
+    }
+
     .diary-input {
-        max-width: 500px;
+        width: 90vw;
+        max-width: 90vw;
     }
 
     .title {
@@ -376,7 +398,6 @@ a {
     }
 }
 
-/* Base Styles (Mobile-First) */
 .register_form,
 .login_form {
     margin: 1rem auto;
@@ -384,16 +405,10 @@ a {
     justify-content: center;
     padding: 1.5rem;
     background-color: rgba(255, 255, 255, 0.8);
-    /* Semi-transparent white */
+    color: turquoise;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     max-width: 90%;
-}
-
-.register_form h1,
-.login_form h1 {
-    color: #f4a460;
-    /* Coral color for headings */
 }
 
 .form_field {
@@ -405,7 +420,7 @@ a {
 }
 
 .field_label {
-    color: #f4a460;
+    color: turquoise;
     font-weight: bold;
     margin-bottom: 0.5em;
 }
@@ -413,7 +428,8 @@ a {
 .field_input {
     width: 100%;
     padding: 0.75em;
-    border: 2px solid #f4a460;
+    border: 2px solid turquoise;
+    ;
     /* Sand color */
     border-radius: 10px;
     background-color: #fffaf0;
@@ -423,8 +439,7 @@ a {
 }
 
 .field_input:focus {
-    border-color: #ffa07a;
-    /* Light coral on focus */
+    border-color: turquoise;
     box-shadow: 0 0 5px rgba(255, 160, 122, 0.5);
     outline: none;
 }
@@ -432,7 +447,7 @@ a {
 .form_button {
     margin-top: 1.5em;
     padding: 0.75em 2em;
-    background-color: #ffa07a;
+    background-color: turquoise;
     /* Light coral */
     border: none;
     border-radius: 30px;
@@ -446,7 +461,7 @@ a {
 }
 
 .form_button:hover {
-    background-color: #ff6347;
+    background-color: yellow;
     /* Tomato red on hover */
     color: #fffaf0;
     /* Light sand */
@@ -529,7 +544,7 @@ a {
     }
 }
 
-.view_buttons {
+.view-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -537,7 +552,7 @@ a {
 }
 
 .new_entry {
-    margin: 3rem;
+    margin: 1.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
