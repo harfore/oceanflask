@@ -2,29 +2,31 @@
 {% block content %}
 
 {% if entries %}
-<h2>Your Entries</h2>
-<div class="entries-container">
-    {% for entry in entries %}
-    <a href="{{ url_for('view_entry', entry_id=entry['id']) }}">
-        <div class="bottle">
-            <div class="parchment">
-                <p>
-                    <strong>
-                        {% if entry['timestamp'].year == current_timestamp.year %}
-                        {{ entry['timestamp'] | strftime('%B %d') }}
-                        {% else %}
-                        {{ entry['timestamp'] | strftime('%B %d, %Y') }}
-                        {% endif %}
-                    </strong>
-                    {{ entry['entry'].split(' ')[:3] | join(' ') }}...
-                </p>
+<div class="container">
+    <h2 class="title">The ocean always remembers. From the dephts of the abyss, your previous thoughts.</h2>
+    <div class="entries-container">
+        {% for entry in entries %}
+        <a href="{{ url_for('view_entry', entry_id=entry['id']) }}">
+            <div class="bottle">
+                <div class="parchment">
+                    <p>
+                        <strong>
+                            {% if entry['timestamp'].year == current_timestamp.year %}
+                            {{ entry['timestamp'] | strftime('%B %d') }}
+                            {% else %}
+                            {{ entry['timestamp'] | strftime('%B %d, %Y') }}
+                            {% endif %}
+                        </strong>
+                        {{ entry['entry'].split(' ')[:3] | join(' ') }}...
+                    </p>
+                </div>
             </div>
-        </div>
-    </a>
-    {% endfor %}
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p> </p>
+    {% endif %}
 </div>
-{% else %}
-<p> </p>
-{% endif %}
 
 {% endblock %}

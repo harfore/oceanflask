@@ -50,10 +50,10 @@ def format_datetime(value, format='%B %d, %Y'):
 @app.route('/')
 def index():
     entries = [
-        "Discovery, released in 2001, is the second album released by electronic French duo Daft Punk.",
-        "Discovery, released in 2001, is the second album released by electronic French duo Daft Punk.",
+        "First night in my new apartment. It’s small, but it’s all mine.",
         "10 months sober today.",
-        "Discovery, released in 2001, is the second album released by electronic French duo Daft Punk."
+        "Six months of consistent meditation practice. Feeling centered.",
+        "Another sleepless night. My mind just won’t stop racing."
     ]
     return render_template('index.html', entries=entries)
 

@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="title">Diary Entry</h1>
+<div class="container">
+    <h1 class="title">Flask</h1>
 
-<div class="parchment">
-    <p class="entry_date"> {{ entry['timestamp'] }}</p>
-    <p>{{ entry['entry'] }}</p>
-</div>
+    <div class="parchment">
+        <p class="entry_date"> {{ entry['timestamp'] }}</p>
+        <p>{{ entry['entry'] }}</p>
+    </div>
 
-<div class="view-buttons">
-    <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
-        <button class="header-button" type="submit"><i class="fas fa-trash"></i><span>Delete</span></button>
-    </form>
+    <div class="view-buttons">
+        <form method="post" action="{{ url_for('delete_entry', entry_id=entry['id']) }}">
+            <button class="header-button" type="submit"><i class="fas fa-trash"></i><span>Delete</span></button>
+        </form>
 
-    <a href="{{ url_for('diary') }}" class="diary-button">Back to Diary</a>
+        <a href="{{ url_for('diary') }}" class="diary-button">Back to Diary</a>
+    </div>
 </div>
 {% endblock %}

@@ -2,19 +2,19 @@
 {% block content %}
 
 <div class="account_menu_container">
-    <div class="menu_option">
-        <i class="fas fa-book-open"></i>
-        <a href="{{ url_for('diary') }}">
+    <a href="{{ url_for('diary') }}">
+        <div class="menu_option">
+            <i class="fas fa-book-open"></i>
             <span class="menu_option_title">Revisit old entries</span>
-        </a>
-    </div>
+        </div>
+    </a>
 
-    <div class="menu_option">
-        <i class="fas fa-pencil-alt"></i>
-        <a href="{{ url_for('new_entry') }}">
+    <a href="{{ url_for('new_entry') }}">
+        <div class="menu_option">
+            <i class="fas fa-pencil-alt"></i>
             <span class="menu_option_title">Write a new entry</span>
-        </a>
-    </div>
+        </div>
+    </a>
 </div>
 
 {% endblock %}

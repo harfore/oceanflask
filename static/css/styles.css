@@ -10,6 +10,7 @@ body {
     background: linear-gradient(to bottom, #87ceeb, #fdf5e6);
     background-size: cover;
     background-attachment: fixed;
+
     /* Ensures the image covers the entire screen */
     background-position: center;
     background-repeat: no-repeat;
@@ -80,7 +81,6 @@ a {
 .mobile-slide-menu a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-right: 0.5rem;
-
 }
 
 .mobile-slide-menu.show {
@@ -91,11 +91,11 @@ a {
     margin: 1rem;
     text-decoration: none;
     justify-content: flex-start;
-    color: rgb(2, 148, 173);
+    color: white;
 }
 
 .header-container {
-    background-color: turquoise;
+    background: linear-gradient(135deg, turquoise, #0168e6);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -108,7 +108,7 @@ a {
     width: 3rem;
     height: 3rem;
     padding: 0.75rem;
-    background-color: rgb(2, 148, 173);
+    background-color: turquoise;
     border-radius: 50%;
     border: rgb(0, 100, 117);
     cursor: pointer;
@@ -194,6 +194,8 @@ a {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
+    justify-content: center;
+    font-size: 1.1rem;
 }
 
 .header-nav {
@@ -203,11 +205,15 @@ a {
     justify-content: flex-end;
 }
 
+.header-nav i {
+    color: white !important;
+}
+
 .container {
     /* general */
     height: 20rem;
     width: 90%;
-    margin: auto;
+    margin: 4rem auto auto;
 }
 
 .entry_date {
@@ -220,6 +226,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 }
 
 .menu_option {
@@ -228,12 +235,12 @@ a {
     width: 12rem;
     height: 12rem;
     animation: float 4s ease-in-out infinite;
-    border: 1rem solid turquoise;
+    border: 0.5rem solid turquoise;
     border-radius: 30%;
     gap: 2rem;
     text-align: center;
     justify-content: center;
-    margin: 2rem auto auto;
+    margin: 4rem auto auto;
     display: flex;
     flex-direction: column;
 }
@@ -250,7 +257,6 @@ a {
     color: white;
 }
 
-/* Media queries for larger screens */
 @media (min-width: 768px) {
     body {
         margin: 0;
@@ -262,8 +268,10 @@ a {
     }
 
     .diary-input {
-        width: 90vw;
+        width: 70vw;
         max-width: 90vw;
+        margin: auto;
+        border-radius: 1rem;
     }
 
     .title {
@@ -301,10 +309,12 @@ a {
     .header-nav {
         display: flex;
         padding: 0 2rem;
+        margin-right: 1.5rem;
     }
 
     .account_menu_container {
         flex-direction: row;
+        gap: 15vw;
     }
 }
 
@@ -342,7 +352,6 @@ a {
     left: 0;
     border-radius: 50%;
     box-shadow: 0 10px 0 #f5deb3;
-    /* Fake torn shadow */
 }
 
 .parchment:after {
@@ -361,11 +370,9 @@ a {
     width: 100px;
     height: 250px;
     background: #d0efff;
-    /* Glassy blue */
     border-radius: 40% / 10%;
     margin: 3rem auto;
     border: 4px solid #a0d2eb;
-    /* Glass border */
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
@@ -469,7 +476,6 @@ a {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Media Queries for Larger Screens */
 @media (min-width: 768px) {
 
     .register_form,
